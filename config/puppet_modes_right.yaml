@@ -6,12 +6,12 @@ groups:
     profile_type: velocity
     profile_velocity: 0
     profile_acceleration: 0
-    torque_enable: true
+    torque_enable: false
 
 singles:
   gripper:
-    operating_mode: linear_position
+    operating_mode: position
     profile_type: velocity
     profile_velocity: 0
     profile_acceleration: 0
-    torque_enable: true
+    torque_enable: false

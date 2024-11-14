@@ -1,8 +1,10 @@
 <launch>
 
-  <arg name="robot_model_master"                default="wx250s"/>
-  <arg name="robot_model_puppet"                default="vx300s"/>
+  <arg name="robot_model_master"                default="aloha_wx250s"/>
+  <arg name="robot_model_puppet"                default="aloha_vx300s"/>
 
+  <arg name="master_description"                default="wx250s"/>
+  <arg name="puppet_description"                default="vx300s"/>
   <arg name="base_link_master"                  default="base_link"/>
   <arg name="base_link_puppet"                  default="base_link"/>
 
@@ -13,7 +15,7 @@
 
   <arg name="launch_driver"                     default="true"/>
   <arg name="use_sim"                           default="false"/>
-
+  <arg name="use_rviz"                          default="false"/>
   <arg name="robot_name_master_left"            value="master_left"/>
   <arg name="robot_name_puppet_left"            value="puppet_left"/>
   <arg name="robot_name_master_right"           value="master_right"/>
@@ -22,20 +24,22 @@
 
   <include if="$(arg launch_driver)" file="$(find interbotix_xsarm_control)/launch/xsarm_control.launch">
     <arg name="robot_model"                       value="$(arg robot_model_master)"/>
+    <arg name="robot_description"                 value="$(arg master_description)"/>
     <arg name="robot_name"                        value="$(arg robot_name_master_left)"/>
     <arg name="base_link_frame"                   value="$(arg base_link_master)"/>
     <arg name="use_world_frame"                   value="false"/>
-    <arg name="use_rviz"                          value="false"/>
+    <arg name="use_rviz"                          value="$(arg use_rviz)"/>
     <arg name="mode_configs"                      value="$(arg master_modes_left)"/>
     <arg name="use_sim"                           value="$(arg use_sim)"/>
   </include>
 
   <include if="$(arg launch_driver)" file="$(find interbotix_xsarm_control)/launch/xsarm_control.launch">
     <arg name="robot_model"                       value="$(arg robot_model_master)"/>
+    <arg name="robot_description"                 value="$(arg master_description)"/>
     <arg name="robot_name"                        value="$(arg robot_name_master_right)"/>
     <arg name="base_link_frame"                   value="$(arg base_link_master)"/>
     <arg name="use_world_frame"                   value="false"/>
-    <arg name="use_rviz"                          value="false"/>
+    <arg name="use_rviz"                          value="$(arg use_rviz)"/>
     <arg name="mode_configs"                      value="$(arg master_modes_right)"/>
     <arg name="use_sim"                           value="$(arg use_sim)"/>
   </include>
@@ -43,20 +47,22 @@
 
   <include if="$(arg launch_driver)" file="$(find interbotix_xsarm_control)/launch/xsarm_control.launch">
     <arg name="robot_model"                       value="$(arg robot_model_puppet)"/>
+    <arg name="robot_description"                 value="$(arg puppet_description)"/>
     <arg name="robot_name"                        value="$(arg robot_name_puppet_left)"/>
     <arg name="base_link_frame"                   value="$(arg base_link_puppet)"/>
     <arg name="use_world_frame"                   value="false"/>
-    <arg name="use_rviz"                          value="false"/>
+    <arg name="use_rviz"                          value="$(arg use_rviz)"/>
     <arg name="mode_configs"                      value="$(arg puppet_modes_left)"/>
     <arg name="use_sim"                           value="$(arg use_sim)"/>
   </include>
 
   <include if="$(arg launch_driver)" file="$(find interbotix_xsarm_control)/launch/xsarm_control.launch">
     <arg name="robot_model"                       value="$(arg robot_model_puppet)"/>
+    <arg name="robot_description"                 value="$(arg puppet_description)"/>
     <arg name="robot_name"                        value="$(arg robot_name_puppet_right)"/>
     <arg name="base_link_frame"                   value="$(arg base_link_puppet)"/>
     <arg name="use_world_frame"                   value="false"/>
-    <arg name="use_rviz"                          value="false"/>
+    <arg name="use_rviz"                          value="$(arg use_rviz)"/>
     <arg name="mode_configs"                      value="$(arg puppet_modes_right)"/>
     <arg name="use_sim"                           value="$(arg use_sim)"/>
   </include>

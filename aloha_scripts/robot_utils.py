@@ -156,7 +156,7 @@ def move_grippers(bot_list, target_pose_list, move_time):
     for t in range(num_steps):
         for bot_id, bot in enumerate(bot_list):
             gripper_command.cmd = traj_list[bot_id][t]
-            bot.gripper.core.pub_single.publish(gripper_command)
+            bot.gripper .core.pub_single.publish(gripper_command)
         time.sleep(DT)
 
 def setup_puppet_bot(bot):

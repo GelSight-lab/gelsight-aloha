@@ -5,7 +5,7 @@ e = IPython.embed
 
 from interbotix_xs_modules.arm import InterbotixManipulatorXS
 from interbotix_xs_msgs.msg import JointSingleCommand
-from constants import MASTER2PUPPET_JOINT_FN, DT, START_ARM_POSE, MASTER_GRIPPER_JOINT_MID, PUPPET_GRIPPER_JOINT_CLOSE
+from constants import MASTER2PUPPET_JOINT_FN, DT, START_ARM_POSE, MASTER_GRIPPER_JOINT_MID, PUPPET_GRIPPER_JOINT_CLOSE, MASTER_GRIPPER_JOINT_CLOSE
 from robot_utils import torque_on, torque_off, move_arms, move_grippers, get_arm_gripper_positions
 
 def prep_robots(master_bot, puppet_bot):
@@ -31,10 +31,11 @@ def press_to_start(master_bot):
     # disable torque for only gripper joint of master robot to allow user movement
     master_bot.dxl.robot_torque_enable("single", "gripper", False)
     print(f'Close the gripper to start')
-    close_thresh = -0.3
+    close_thresh = MASTER_GRIPPER_JOINT_CLOSE + 0.1  # rad
     pressed = False
     while not pressed:
         gripper_pos = get_arm_gripper_positions(master_bot)
+        print(gripper_pos)
         if gripper_pos < close_thresh:
             pressed = True
         time.sleep(DT/10)
